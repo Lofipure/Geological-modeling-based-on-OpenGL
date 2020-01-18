@@ -1,0 +1,5 @@
+﻿  main.cpp
+main.obj : error LNK2019: 无法解析的外部符号 _glewInit@0，该符号在函数 _main 中被引用
+main.obj : error LNK2001: 无法解析的外部符号 _glewExperimental
+C:\workspace\Build\packages\glew.1.9.0.1\build\native\lib\v110\x64\Debug\static\glew.lib : warning LNK4272: 库计算机类型“x64”与目标计算机类型“x86”冲突
+C:\workspace\Build\Debug\Build.exe : fatal error LNK1120: 2 个无法解析的外部命令

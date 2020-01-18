@@ -1,0 +1,11 @@
+﻿  main.cpp
+C:\workspace\Build\Build\main.cpp(29,11): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\workspace\Build\Build\main.cpp(30,11): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\workspace\Build\Build\main.cpp(34,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\workspace\Build\Build\main.cpp(35,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\workspace\Build\Build\main.cpp(36,10): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\workspace\Build\Build\main.cpp(37,10): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\workspace\Build\Build\main.cpp(61,49): warning C4244: “-=”: 从“double”转换到“float”，可能丢失数据
+C:\workspace\Build\Build\main.cpp(71,20): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\workspace\Build\Build\main.cpp(134,22): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  Build.vcxproj -> C:\workspace\Build\x64\Debug\Build.exe
