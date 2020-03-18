@@ -1,3 +1,6 @@
-# Geological-modeling-based-on-OpenGL
-Geological modeling based on OpenGL
+# 采动覆岩离层三维模拟方法研究
+
+### 2020 3-18
+
+完成单个地层的可视化
 

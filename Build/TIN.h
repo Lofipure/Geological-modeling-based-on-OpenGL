@@ -18,7 +18,6 @@ public:
 	std::vector<Tri> triList;
 
 public:
-	//double rand();
 	double angle(Line line, long p);
 	long Max(Line line, std::vector<long> usableList);
 	double F(Line line, long p3);

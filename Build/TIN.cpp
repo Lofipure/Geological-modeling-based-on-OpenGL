@@ -1,5 +1,14 @@
+/* 
+	扩张生长算法生成TIN网络
+	边扩展算法
+*/
 #include "TIN.h"
 
+/*
+	@Function Name: angle
+	@Function param: 线line和点在point中的下标
+	@Function return value: 一个点和线段两端的端点形成的两条线的夹角
+*/
 double TIN::angle(Line line, long p) {
 	double a, b, c;
 
@@ -12,7 +21,15 @@ double TIN::angle(Line line, long p) {
 	return z;
 }
 
+/*
+	@Function Name: Max
+	@Function param: 线line和可用的点的下标组成的集合
+	@Function return value:返回cos最大的角对应的点
+*/
 long TIN::Max(Line line, std::vector<long> usableList) {
+	/*
+		cos值在0到Π之间递减，所以cos最大即为角最小
+	*/
 	long index = -1;
 	double xitaMax = 0, xita = 0;
 
@@ -38,6 +55,11 @@ double TIN::F(Line line, long p3) {
 	return z;
 }
 
+/*
+	@Function Name: distance
+	@Function param: 两个点在pointList中的下标
+	@Function return value: 两点之间的距离
+*/
 double TIN::distance(long p1, long p2) {
 	double z = 0;
 	if (p1 != p2) {
@@ -45,10 +67,14 @@ double TIN::distance(long p1, long p2) {
 
 		z = sqrt((a1.x - a2.x) * (a1.x - a2.x) + (a1.y - a2.y) * (a1.y - a2.y));
 	}
-
 	return z;
 }
 
+/*
+	@Function Name: createPoint
+	@Function param: 要产生的随机点的数量
+	@Function return value: void   =>   在point中产生n个随机点
+*/
 void TIN::createPoint(int n) {
 	Point point;
 	srand(time(NULL));
@@ -105,10 +131,12 @@ void TIN::createTin() {
 			//找拓展点
 			long tuo = -1;
 
-			if (lineList[triList[k].L0].p0 == lineList[triList[k].L1].p0 || lineList[triList[k].L0].p1 == lineList[triList[k].L1].p0) {
+			if (lineList[triList[k].L0].p0 == lineList[triList[k].L1].p0 
+				|| lineList[triList[k].L0].p1 == lineList[triList[k].L1].p0) {
 				tuo = lineList[triList[k].L1].p1;
 			}
-			if (lineList[triList[k].L0].p0 == lineList[triList[k].L1].p1 || lineList[triList[k].L0].p1 == lineList[triList[k].L1].p1) {
+			if (lineList[triList[k].L0].p0 == lineList[triList[k].L1].p1 
+				|| lineList[triList[k].L0].p1 == lineList[triList[k].L1].p1) {
 				tuo = lineList[triList[k].L1].p0;
 			}
 
@@ -118,7 +146,12 @@ void TIN::createTin() {
 			Fuhao = F(lineList[triList[k].L0], tuo);
 
 			for (long i = 0; i < pointList.size(); ++i) {
-				if (lineList[triList[k].L0].p0 != i && lineList[triList[k].L0].p1 != i && lineList[triList[k].L1].p0 != i && lineList[triList[k].L1].p1 != i && lineList[triList[k].L2].p0 != i && lineList[triList[k].L2].p1 != i) {
+				if (lineList[triList[k].L0].p0 != i && 
+					lineList[triList[k].L0].p1 != i && 
+					lineList[triList[k].L1].p0 != i && 
+					lineList[triList[k].L1].p1 != i &&
+					lineList[triList[k].L2].p0 != i && 
+					lineList[triList[k].L2].p1 != i) {
 					//不是三角形的顶点
 					Fu = F(lineList[triList[k].L0], i);
 
@@ -195,10 +228,12 @@ void TIN::createTin() {
 			//找拓展点
 			long tuo = -1;
 
-			if (lineList[triList[k].L1].p0 == lineList[triList[k].L0].p0 || lineList[triList[k].L1].p1 == lineList[triList[k].L0].p0) {
+			if (lineList[triList[k].L1].p0 == lineList[triList[k].L0].p0 ||
+				lineList[triList[k].L1].p1 == lineList[triList[k].L0].p0) {
 				tuo = lineList[triList[k].L0].p1;
 			}
-			if (lineList[triList[k].L1].p0 == lineList[triList[k].L0].p1 || lineList[triList[k].L1].p1 == lineList[triList[k].L0].p1) {
+			if (lineList[triList[k].L1].p0 == lineList[triList[k].L0].p1 || 
+				lineList[triList[k].L1].p1 == lineList[triList[k].L0].p1) {
 				tuo = lineList[triList[k].L0].p0;
 			}
 
@@ -208,7 +243,12 @@ void TIN::createTin() {
 			Fuhao = F(lineList[triList[k].L1], tuo);
 
 			for (long i = 0; i < pointList.size(); ++i) {		//找到可用的顶点
-				if (lineList[triList[k].L0].p0 != i && lineList[triList[k].L0].p1 != i && lineList[triList[k].L1].p0 != i && lineList[triList[k].L1].p1 != i && lineList[triList[k].L2].p0 != i && lineList[triList[k].L2].p1 != i) {
+				if (lineList[triList[k].L0].p0 != i && 
+					lineList[triList[k].L0].p1 != i && 
+					lineList[triList[k].L1].p0 != i && 
+					lineList[triList[k].L1].p1 != i && 
+					lineList[triList[k].L2].p0 != i && 
+					lineList[triList[k].L2].p1 != i) {
 					//不是三角形的顶点
 					Fu = F(lineList[triList[k].L1], i);
 
@@ -281,10 +321,12 @@ void TIN::createTin() {
 		/* L2 边 */
 		if (lineList[triList[k].L2].useCount < 2) {
 			long tuo = -1;
-			if (lineList[triList[k].L2].p0 == lineList[triList[k].L0].p0 || lineList[triList[k].L2].p1 == lineList[triList[k].L0].p0) {
+			if (lineList[triList[k].L2].p0 == lineList[triList[k].L0].p0 || 
+				lineList[triList[k].L2].p1 == lineList[triList[k].L0].p0) {
 				tuo = lineList[triList[k].L0].p1;
 			}
-			if (lineList[triList[k].L2].p0 == lineList[triList[k].L0].p1 || lineList[triList[k].L2].p1 == lineList[triList[k].L0].p1) {
+			if (lineList[triList[k].L2].p0 == lineList[triList[k].L0].p1 ||
+				lineList[triList[k].L2].p1 == lineList[triList[k].L0].p1) {
 				tuo = lineList[triList[k].L0].p0;
 			}
 
@@ -293,7 +335,12 @@ void TIN::createTin() {
 			Fuhao = F(lineList[triList[k].L2], tuo);
 
 			for (long i = 0; i < pointList.size(); ++i) {
-				if (lineList[triList[k].L0].p0 != i && lineList[triList[k].L0].p1 != i && lineList[triList[k].L1].p0 != i && lineList[triList[k].L1].p1 != i && lineList[triList[k].L2].p0 != i && lineList[triList[k].L2].p1 != i) {
+				if (lineList[triList[k].L0].p0 != i && 
+					lineList[triList[k].L0].p1 != i && 
+					lineList[triList[k].L1].p0 != i && 
+					lineList[triList[k].L1].p1 != i && 
+					lineList[triList[k].L2].p0 != i && 
+					lineList[triList[k].L2].p1 != i) {
 					Fu = F(lineList[triList[k].L2], i);
 
 					if (Fuhao * Fu < 0) {
@@ -372,6 +419,11 @@ void TIN::createTin() {
 	}
 }
 
+/*
+	@Function Name: writeFile
+	@Function param: void
+	@Function return value: void   =>   将产生的TIN写入到文件中
+*/
 void TIN::writeFile() {
 	FILE* vertexInput = fopen("input.txt","w");
 	FILE* triInput = fopen("Tin.txt", "w");
@@ -391,6 +443,7 @@ void TIN::writeFile() {
 	}
 
 	std::cout << "Edge Info write Over" << std::endl;
+
 	EXIT:
 	fclose(vertexInput);
 	fclose(triInput);

@@ -1,3 +1,4 @@
+// 头文件引入
 #include <iostream>
 #include <cstdio>
 
@@ -10,6 +11,7 @@
 
 #include "TIN.h"
 
+// 定义摄像机相关变量
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -128,7 +130,7 @@ int main(void) {
 	Shader shaderProgram("shader.vs", "shader.fs");
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//glEnable(GL_DEPTH);
+	//glEnable(GL_DEPTH);				开启深度测试
 
 	while (!glfwWindowShouldClose(window)) {
 		float currentFrame = glfwGetTime();
@@ -138,7 +140,7 @@ int main(void) {
 		pressInput(window);
 
 		glClearColor(0.3f, 0.6f, 0.5f, 1.0f);
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);				深度测试
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shaderProgram.use();
