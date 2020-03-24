@@ -1,13 +1,9 @@
-/* 
-	À©ÕÅÉú³¤Ëã·¨Éú³ÉTINÍøÂç
-	±ßÀ©Õ¹Ëã·¨
-*/
 #include "TIN.h"
 
 /*
 	@Function Name: angle
-	@Function param: ÏßlineºÍµãÔÚpointÖĞµÄÏÂ±ê
-	@Function return value: Ò»¸öµãºÍÏß¶ÎÁ½¶ËµÄ¶ËµãĞÎ³ÉµÄÁ½ÌõÏßµÄ¼Ğ½Ç
+	@Function param: çº¿lineå’Œç‚¹åœ¨pointä¸­çš„ä¸‹æ ‡
+	@Function return value: ä¸€ä¸ªç‚¹å’Œçº¿æ®µä¸¤ç«¯çš„ç«¯ç‚¹å½¢æˆçš„ä¸¤æ¡çº¿çš„å¤¹è§’ï¼Œä¹Ÿå°±æ˜¯ä¸€ç‚¹åˆ°åŸºè¾¹çš„å¼ è§’
 */
 double TIN::angle(Line line, long p) {
 	double a, b, c;
@@ -23,13 +19,10 @@ double TIN::angle(Line line, long p) {
 
 /*
 	@Function Name: Max
-	@Function param: ÏßlineºÍ¿ÉÓÃµÄµãµÄÏÂ±ê×é³ÉµÄ¼¯ºÏ
-	@Function return value:·µ»Øcos×î´óµÄ½Ç¶ÔÓ¦µÄµã
+	@Function param: çº¿lineå’Œå¯ç”¨çš„ç‚¹çš„ä¸‹æ ‡ç»„æˆçš„é›†åˆ
+	@Function return value:è¿”å›æœ€å¤§å¼ è§’å¯¹åº”çš„ç‚¹
 */
 long TIN::Max(Line line, std::vector<long> usableList) {
-	/*
-		cosÖµÔÚ0µ½¦°Ö®¼äµİ¼õ£¬ËùÒÔcos×î´ó¼´Îª½Ç×îĞ¡
-	*/
 	long index = -1;
 	double xitaMax = 0, xita = 0;
 
@@ -44,6 +37,11 @@ long TIN::Max(Line line, std::vector<long> usableList) {
 	return index;
 }
 
+/*
+	@Function Name: F
+	@Function param: line & point
+	@Function return value: åˆ¤æ–­ç‚¹æ˜¯åœ¨ä¸‰è§’å½¢å·¦ä¾§è¿˜æ˜¯ä¸‰è§’å½¢å³ä¾§
+*/
 double TIN::F(Line line, long p3) {
 	Point a0 = pointList[line.p0], a1 = pointList[line.p1], a2 = pointList[p3];
 
@@ -57,8 +55,8 @@ double TIN::F(Line line, long p3) {
 
 /*
 	@Function Name: distance
-	@Function param: Á½¸öµãÔÚpointListÖĞµÄÏÂ±ê
-	@Function return value: Á½µãÖ®¼äµÄ¾àÀë
+	@Function param: ä¸¤ä¸ªç‚¹åœ¨pointListä¸­çš„ä¸‹æ ‡
+	@Function return value: ä¸¤ç‚¹ä¹‹é—´çš„è·ç¦»
 */
 double TIN::distance(long p1, long p2) {
 	double z = 0;
@@ -72,8 +70,8 @@ double TIN::distance(long p1, long p2) {
 
 /*
 	@Function Name: createPoint
-	@Function param: Òª²úÉúµÄËæ»úµãµÄÊıÁ¿
-	@Function return value: void   =>   ÔÚpointÖĞ²úÉún¸öËæ»úµã
+	@Function param: è¦äº§ç”Ÿçš„éšæœºç‚¹çš„æ•°é‡
+	@Function return value: void   =>   åœ¨pointä¸­äº§ç”Ÿnä¸ªéšæœºç‚¹
 */
 void TIN::createPoint(int n) {
 	Point point;
@@ -87,13 +85,25 @@ void TIN::createPoint(int n) {
 	}
 }
 
+/*
+	@Function Name: createTin
+	@Function param: void
+	@Function return value:ä½¿ç”¨æ‰©å¼ ç”Ÿé•¿æ³•-æ„å»ºTINç½‘ç»œ
+*/
 void TIN::createTin() {
+	/*
+		ç¬¬ä¸€æ­¥ï¼šåœ¨æ•°æ®ç‚¹ä¸­ä»»å–ä¸€ç‚¹Aï¼Œå¹¶å¯»æ‰¾è·ç¦»æ­¤ç‚¹æœ€è¿‘çš„ç‚¹Bï¼Œä¸¤è€…ç›¸è¿å½¢æˆåŸºçº¿ABï¼Œåˆ©ç”¨ä¸‰è§’å½¢å‰–åˆ†å‡†åˆ™ï¼Œå¯»æ‰¾ç¬¬ä¸‰ç‚¹Cï¼Œå½¢æˆç¬¬ä¸€ä¸ªDelaunayä¸‰è§’å½¢ABC
+
+		ç¬¬äºŒæ­¥ï¼šä»¥åˆå§‹ä¸‰è§’å½¢çš„ä¸‰æ¡è¾¹ä¸ºåˆå§‹åŸºçº¿ï¼Œåˆ©ç”¨å¼ è§’æœ€å¤§åŸåˆ™ï¼Œå¯»æ‰¾èƒ½ä¸è¯¥ä¸‰æ¡åˆå§‹åŸºçº¿å½¢æˆDelaunayä¸‰è§’å½¢çš„Dã€Eã€Fç‚¹
+
+		ç¬¬ä¸‰æ­¥ï¼šé‡å¤ç¬¬äºŒæ­¥ï¼Œç›´åˆ°æ‰€æœ‰æ•°æ®å¤„ç†å®Œæ¯•
+	*/
 	std::vector<long> usablePointList;
 
-	Tri tri;	//Éú³ÉµÚ0¸öÈı½ÇĞÎ
+	Tri tri;					//ç”Ÿæˆç¬¬0ä¸ªä¸‰è§’å½¢
 	long k = 0;
 
-	Line line0;	//µÚL0±ß
+	Line line0;					//ç¬¬L0è¾¹
 	line0.p0 = 0;
 	line0.p1 = 1;
 	line0.useCount = 1;
@@ -107,8 +117,7 @@ void TIN::createTin() {
 	long index = -1;
 	index = Max(line0, usablePointList);
 
-	/* Éú³ÉL1,L2±ß */
-	Line line1, line2;
+	Line line1, line2;			//ç”ŸæˆL1,L2è¾¹
 
 	line1.p0 = 0;
 	line1.p1 = index;
@@ -124,11 +133,13 @@ void TIN::createTin() {
 
 	triList.push_back(tri);
 
-	/* ¶ÔÓÚµÚK¸öÈı½ÇĞÎÎªÍØÕ¹Èı½ÇĞÎÊ± */
+	/* 
+		å¯¹äºç¬¬Kä¸ªä¸‰è§’å½¢ä¸ºæ‹“å±•ä¸‰è§’å½¢æ—¶ 
+	*/
 	while (1) {
-		/* L0 ±ß */
-		if (lineList[triList[k].L0].useCount < 2) {	//ÅĞ¶ÏÊÇ²»ÊÇ¿ÉÍØÕ¹±ß
-			//ÕÒÍØÕ¹µã
+		/* L0 è¾¹ */
+		if (lineList[triList[k].L0].useCount < 2) {	//åˆ¤æ–­æ˜¯ä¸æ˜¯å¯æ‹“å±•è¾¹
+			//æ‰¾æ‹“å±•ç‚¹
 			long tuo = -1;
 
 			if (lineList[triList[k].L0].p0 == lineList[triList[k].L1].p0 
@@ -152,10 +163,10 @@ void TIN::createTin() {
 					lineList[triList[k].L1].p1 != i &&
 					lineList[triList[k].L2].p0 != i && 
 					lineList[triList[k].L2].p1 != i) {
-					//²»ÊÇÈı½ÇĞÎµÄ¶¥µã
+					//ä¸æ˜¯ä¸‰è§’å½¢çš„é¡¶ç‚¹
 					Fu = F(lineList[triList[k].L0], i);
 
-					if (Fuhao * Fu < 0) {	//ÒìºÅ
+					if (Fuhao * Fu < 0) {	//å¼‚å·
 						usablePointList.push_back(i);
 					}
 				}
@@ -223,9 +234,9 @@ void TIN::createTin() {
 			}
 			lineList[triList[k].L0].useCount = 2;
 		}
-		/* L1 ±ß */
+		/* L1 è¾¹ */
 		if (lineList[triList[k].L1].useCount < 2) {
-			//ÕÒÍØÕ¹µã
+			//æ‰¾æ‹“å±•ç‚¹
 			long tuo = -1;
 
 			if (lineList[triList[k].L1].p0 == lineList[triList[k].L0].p0 ||
@@ -242,19 +253,18 @@ void TIN::createTin() {
 			double Fuhao = 0, Fu = 0;
 			Fuhao = F(lineList[triList[k].L1], tuo);
 
-			for (long i = 0; i < pointList.size(); ++i) {		//ÕÒµ½¿ÉÓÃµÄ¶¥µã
+			for (long i = 0; i < pointList.size(); ++i) {		//æ‰¾åˆ°å¯ç”¨çš„é¡¶ç‚¹
 				if (lineList[triList[k].L0].p0 != i && 
 					lineList[triList[k].L0].p1 != i && 
 					lineList[triList[k].L1].p0 != i && 
 					lineList[triList[k].L1].p1 != i && 
 					lineList[triList[k].L2].p0 != i && 
 					lineList[triList[k].L2].p1 != i) {
-					//²»ÊÇÈı½ÇĞÎµÄ¶¥µã
+					//ä¸æ˜¯ä¸‰è§’å½¢çš„é¡¶ç‚¹
 					Fu = F(lineList[triList[k].L1], i);
 
 					if (Fuhao * Fu < 0) {
-						//ÒìºÅ
-
+						//å¼‚å·
 						usablePointList.push_back(i);
 					}
 				}
@@ -318,7 +328,7 @@ void TIN::createTin() {
 			}
 			lineList[triList[k].L1].useCount = 2;
 		}
-		/* L2 ±ß */
+		/* L2 è¾¹ */
 		if (lineList[triList[k].L2].useCount < 2) {
 			long tuo = -1;
 			if (lineList[triList[k].L2].p0 == lineList[triList[k].L0].p0 || 
@@ -422,7 +432,7 @@ void TIN::createTin() {
 /*
 	@Function Name: writeFile
 	@Function param: void
-	@Function return value: void   =>   ½«²úÉúµÄTINĞ´Èëµ½ÎÄ¼şÖĞ
+	@Function return value: void   =>   å°†äº§ç”Ÿçš„TINå†™å…¥åˆ°æ–‡ä»¶ä¸­
 */
 void TIN::writeFile() {
 	FILE* vertexInput = fopen("input.txt","w");

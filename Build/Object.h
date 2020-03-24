@@ -9,24 +9,27 @@
 #include <cstdio>
 #include <iostream>
 
-#include<glm/glm.hpp>
-#include<glm/gtc/matrix_transform.hpp>
-#include<glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-class Object {
+class Object
+{
+/*
+    相当于一个地层类
+*/
 public:
-    //std::vector<float> verticesT;
-    //std::vector<unsigned int> indicesT;
+    // vn == vertices number
+    // in == indices number
     int vn, in;
 
-    float* vertices;
-    unsigned int* indices;
+    float *vertices;                //存放顶点数据的数组
+    unsigned int *indices;          //存放定点顺序的数组(EBO)
 
     unsigned int VAO, VBO, EBO;
     Object();
 
     void drawObject();
-
 };
 
 #endif // !OBJECT_H

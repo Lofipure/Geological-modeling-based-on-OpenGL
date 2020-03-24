@@ -11,7 +11,8 @@
 #include <cstdlib>
 #include <ctime>
 
-class TIN {
+class TIN
+{
 public:
 	std::vector<Point> pointList;
 	std::vector<Line> lineList;
@@ -26,6 +27,7 @@ public:
 	void createPoint(int n);
 	void createTin();
 	void writeFile();
+
 public:
 	TIN() = default;
 };

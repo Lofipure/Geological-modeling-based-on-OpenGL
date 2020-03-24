@@ -1,7 +1,8 @@
 #ifndef _POINT_H_
 #define _POINT_H_
 
-class Point {
+class Point
+{
 public:
 	double x, y, z;
 	Point();
