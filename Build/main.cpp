@@ -151,16 +151,34 @@ int main(void)
 	}
 	glViewport(0, 0, 1600, 900);
 
+	Object Tir;
+
+	// 建立地层TIN模型
 	TIN tinModel;
-	int n;
+	int m, n;
 	std::cout << "the number of the point: ";
 	std::cin >> n;
+	std::cout << "the number of the tower: ";
+	std::cin >> m;
 
-	tinModel.createPoint(n);
-	tinModel.createTin();
-	tinModel.writeFile();
+	for (int index = 0; index < m; ++index) {
+		tinModel.createPoint(n,index);
+		tinModel.createTin();
+		tinModel.writeFile();
 
-	Object Tir;
+		Tir.getInVertices();
+		Tir.getInIndices(n,index);
+
+		remove("input.txt");
+		remove("Tin.txt");
+
+		tinModel.emptyData();	
+	}
+
+	Tir.finalHandle();
+	std::cout << "TIN Model Rendering Over" << std::endl;
+
+	// 准备着色器
 	Shader shaderProgram("shader.vs", "shader.fs");
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);	//开启奇妙的只画线模式
@@ -180,6 +198,9 @@ int main(void)
 
 		shaderProgram.use();
 
+		/*
+			2D到3D的空间变换需要三个核心矩阵：Model( 模型 )、View( 观察 )、Projection( 投影 )
+		*/
 		glm::mat4 projection = glm::perspective(glm::radians(fov), (float)1600 / (float)900, 0.1f, 100.0f);
 		shaderProgram.setMat4("projection", projection);
 
@@ -191,6 +212,7 @@ int main(void)
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.3f, 0.5f));
 		shaderProgram.setMat4("model", model);
 
+		// 绘制图形
 		Tir.drawObject();
 
 		glfwSwapBuffers(window);

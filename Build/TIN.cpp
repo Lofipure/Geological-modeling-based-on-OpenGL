@@ -73,14 +73,15 @@ double TIN::distance(long p1, long p2) {
 	@Function param: 要产生的随机点的数量
 	@Function return value: void   =>   在point中产生n个随机点
 */
-void TIN::createPoint(int n) {
+void TIN::createPoint(int n,long index) {
 	Point point;
 	srand(time(NULL));
 
 	for (long i = 0; i < n; ++i) {
 		point.x = rand() % 100 * 0.01 * pow(-1, (rand() % 2));
 		point.y = rand() % 100 * 0.01 * pow(-1, (rand() % 2));
-		point.z = rand() % 100 * 0.001 * pow(-1, (rand() % 2));
+		/*point.z = rand() % 100 * 0.001 * pow(-1, (rand() % 2)) + (index * 0.5);*/
+		point.z = rand() % 100 * 0.001 + (index * 0.2);
 		pointList.push_back(point);
 	}
 }
@@ -457,4 +458,13 @@ void TIN::writeFile() {
 	EXIT:
 	fclose(vertexInput);
 	fclose(triInput);
+
+	//remove("Tin.txt");
+	//remove("input.txt");
+}
+
+void TIN::emptyData() {
+	this->pointList.clear();
+	this->lineList.clear();
+	this->triList.clear();
 }

@@ -42,11 +42,13 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geo
 
 	unsigned int vertex, fragment;
 
+	// 编译定点着色器
 	vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex, 1, &vShaderCode, NULL);
 	glCompileShader(vertex);
 	checkCompileErrors(vertex, "VERTEX");
 
+	// 编译片段着色器
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, &fShaderCode, NULL);
 	glCompileShader(fragment);

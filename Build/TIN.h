@@ -24,9 +24,11 @@ public:
 	double F(Line line, long p3);
 	double distance(long p1, long p2);
 
-	void createPoint(int n);
+	void createPoint(int n,long index);
 	void createTin();
 	void writeFile();
+
+	void emptyData();
 
 public:
 	TIN() = default;

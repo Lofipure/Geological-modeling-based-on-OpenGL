@@ -17,6 +17,10 @@ class Object
 {
 /*
     相当于一个地层类
+
+    顶点数组对象：Vertex Array Object，VAO
+    顶点缓冲对象：Vertex Buffer Object，VBO
+    索引缓冲对象：Element Buffer Object，EBO 或Index Buffer Object，IBO
 */
 public:
     // vn == vertices number
@@ -27,9 +31,16 @@ public:
     unsigned int *indices;          //存放定点顺序的数组(EBO)
 
     unsigned int VAO, VBO, EBO;
-    Object();
+    std::vector<float> vTemp;
+    std::vector<unsigned int> iTemp;
+
+    void getInIndices(int n,int index);
+    void getInVertices();
+
+    void finalHandle();
 
     void drawObject();
+    Object();
 };
 
 #endif // !OBJECT_H
